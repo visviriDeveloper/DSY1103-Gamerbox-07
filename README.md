@@ -1,4 +1,4 @@
-# [Gamerbox] - DSY1103 Desarrollo FullStack 1
+# [Gamerbox] - DSY1103 Desarrollo FullStack 1 Evaluación Parcial 2
 
 ## Descripción
 [Descripción breve del dominio y el problema que resuelve]
