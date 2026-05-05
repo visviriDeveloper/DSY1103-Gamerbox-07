@@ -15,7 +15,7 @@
 |---|---------------|--------|-----------------|
 | 1 | ms-usuarios   | 8080   | En construcción |
 | 2 | ms-juegos     | 8081   | En construcción |
-| ? | ?? ??         | ??     | ??              |
+| 3 | ms-reseñas    | 8082   | En construcción |
 
 ## Tecnologias Utilizadas
 - Java 21 / Spring Boot 4.0.6
