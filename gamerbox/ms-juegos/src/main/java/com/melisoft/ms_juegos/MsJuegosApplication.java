@@ -1,13 +1,39 @@
 package com.melisoft.ms_juegos;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import java.time.LocalDateTime;
 
-@SpringBootApplication
-public class MsJuegosApplication {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-	public static void main(String[] args) {
-		SpringApplication.run(MsJuegosApplication.class, args);
-	}
+@Entity
+@Table(name = "ms_juegos")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Juego {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idJuego; //
+
+    @Column(nullable = false)
+    private String nombreJuego; //
+
+    @Enumerated(EnumType.STRING)
+    private MsJuegosApplication plataforma; //
+
+    @Column(name = "fecha_lanzamiento")
+    private LocalDateTime fechaLanzamiento; //
+
+    private Boolean estado; //
+}
+
+public enum MsJuegosApplication {
+    PC, PS5, XBOX, NINTENDO_SWITCH //
 }
