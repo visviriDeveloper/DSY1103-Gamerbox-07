@@ -25,7 +25,7 @@
 | Integrante 2 | Nombre: Matias Fernando Wenger Meza<br>GitHub: https://github.com/solaire27 |
 | Integrante 3 | Nombre: Álvaro David Morales Yanquin<br>GitHub: https://github.com/visviriDeveloper |
 | Caso escogido | GamerBox |
-| Repositorio GitHub | https://github.com/Matias2772/GamerBox |
+| Repositorio GitHub | [https://github.com/Matias2772/GamerBox](https://github.com/visviriDeveloper/DSY1103-Gamerbox-07/) |
 ---
 
 ## 1. Resumen del proyecto
