@@ -1,0 +1,228 @@
+version: '3.8'
+
+services:
+  # ====================================================================
+  # SGBD: BASE DE DATOS CENTRALIZADA (PostgreSQL)
+  # ====================================================================
+  postgres-db:
+    image: postgres:15-alpine
+    container_name: gamerbox-postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+    volumes:
+      - gamerbox_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - gamerbox-network
+
+  # ====================================================================
+  # MICROSERVICIO: USUARIOS (Puerto 8081)
+  # ====================================================================
+  ms-usuarios:
+    image: gamerbox/ms-usuarios:1.0
+    container_name: ms-usuarios-app
+    restart: on-failure
+    build:
+      context: ./ms-usuarios
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/gamerbox_usuarios
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+    depends_on:
+      - postgres-db
+    networks:
+      - gamerbox-network
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
+  # ====================================================================
+  # MICROSERVICIO: JUEGOS (Puerto 8082)
+  # ====================================================================
+  ms-juegos:
+    image: gamerbox/ms-juegos:1.0
+    container_name: ms-juegos-app
+    restart: on-failure
+    build:
+      context: ./ms-juegos
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/gamerbox_juegos
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+    depends_on:
+      - postgres-db
+    networks:
+      - gamerbox-network
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+  # ====================================================================
+  # MICROSERVICIO: RESEÑAS (Puerto 8083)
+  # ====================================================================
+  ms-resenas:
+    image: gamerbox/ms-resenas:1.0
+    container_name: ms-resenas-app
+    restart: on-failure
+    build:
+      context: ./ms-resenas
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/gamerbox_resenas
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+    depends_on:
+      - postgres-db
+    networks:
+      - gamerbox-network
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+  # ====================================================================
+  # MICROSERVICIO: LISTAS (Puerto 8084)
+  # ====================================================================
+  ms-listas:
+    image: gamerbox/ms-listas:1.0
+    container_name: ms-listas-app
+    restart: on-failure
+    build:
+      context: ./ms-listas
+      dockerfile: Dockerfile
+    ports:
+      - "8084:8084"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/gamerbox_listas
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+    depends_on:
+      - postgres-db
+    networks:
+      - gamerbox-network
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
+  # ====================================================================
+  # MICROSERVICIO: COMENTARIOS (Puerto 8085)
+  # ====================================================================
+  ms-comentarios:
+    image: gamerbox/ms-comentarios:1.0
+    container_name: ms-comentarios-app
+    restart: on-failure
+    build:
+      context: ./ms-comentarios
+      dockerfile: Dockerfile
+    ports:
+      - "8085:8085"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/gamerbox_comentarios
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+    depends_on:
+      - postgres-db
+    networks:
+      - gamerbox-network
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
+  # ====================================================================
+  # MICROSERVICIO: SEGUIDORES (Puerto 8086)
+  # ====================================================================
+  ms-seguidores:
+    image: gamerbox/ms-seguidores:1.0
+    container_name: ms-seguidores-app
+    restart: on-failure
+    build:
+      context: ./ms-seguidores
+      dockerfile: Dockerfile
+    ports:
+      - "8086:8086"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/gamerbox_seguidores
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+    depends_on:
+      - postgres-db
+    networks:
+      - gamerbox-network
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
+  # ====================================================================
+  # MICROSERVICIO: FEED (Puerto 8087)
+  # ====================================================================
+  ms-feed:
+    image: gamerbox/ms-feed:1.0
+    container_name: ms-feed-app
+    restart: on-failure
+    build:
+      context: ./ms-feed
+      dockerfile: Dockerfile
+    ports:
+      - "8087:8087"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/gamerbox_feed
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+    depends_on:
+      - postgres-db
+    networks:
+      - gamerbox-network
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
+  # ====================================================================
+  # MICROSERVICIO: LOGIN (Puerto 8088)
+  # ====================================================================
+  ms-login:
+    image: gamerbox/ms-login:1.0
+    container_name: ms-login-app
+    restart: on-failure
+    build:
+      context: ./ms-login
+      dockerfile: Dockerfile
+    ports:
+      - "8088:8088"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/gamerbox_login
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+    depends_on:
+      - postgres-db
+    networks:
+      - gamerbox-network
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+# ====================================================================
+# REDES Y VOLÚMENES AISLADOS
+# ====================================================================
+networks:
+  gamerbox-network:
+    driver: bridge
+
+volumes:
+  gamerbox_data:
+    driver: local
