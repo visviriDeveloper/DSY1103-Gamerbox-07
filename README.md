@@ -1,18 +1,18 @@
-# Sistema de Microservicios "GameBox"
+# Sistema de Microservicios "GamerBox"
 
 **Plataforma de registro, seguimiento de backlogs y comunidad de videojuegos**
 
 ---
 
-| Campo | Valor |
-|---|---|
-| **Cliente** | Comunidad Gamer / Proyecto Académico |
+| Campo | Valor                                   |
+|---|-----------------------------------------|
+| **Cliente** | Comunidad Gamer / Proyecto Académico    |
 | **Proyecto** | Plataforma digital de backlog "GameBox" |
-| **Asignatura** | DSY1103 — Desarrollo FullStack 1 |
-| **Institución** | DuocUC, sede Puerto Varas |
-| **Evaluación** | Evaluación Parcial 2 (EP2) |
-| **Versión documento** | 1.0 |
-| **Fecha** | Mayo 2026 |
+| **Asignatura** | DSY1103 — Desarrollo FullStack 1        |
+| **Institución** | DuocUC, sede Puerto Montt               |
+| **Evaluación** | Evaluación Parcial 2 (EP2)              |
+| **Versión documento** | 1.0                                     |
+| **Fecha** | Mayo 2026                               |
 
 ---
 
@@ -25,7 +25,7 @@
 | Integrante 2 | Nombre: Matias Fernando Wenger Meza<br>GitHub: https://github.com/solaire27 |
 | Integrante 3 | Nombre: Álvaro David Morales Yanquin<br>GitHub: https://github.com/visviriDeveloper |
 | Caso escogido | GamerBox |
-| Repositorio GitHub | [https://github.com/Matias2772/GamerBox](https://github.com/visviriDeveloper/DSY1103-Gamerbox-07/) |
+| Repositorio GitHub | https://github.com/visviriDeveloper/DSY1103-Gamerbox-07 |
 ---
 
 ## 1. Resumen del proyecto
@@ -38,7 +38,7 @@ Este proyecto entrega una **arquitectura de 8 microservicios** que digitaliza y 
 
 ## 2. Contexto y problema de negocio
 
-### 2.1. Dolor del Usuario
+### 2.1. Problema del Usuario
 Actualmente, los jugadores poseen bibliotecas de juegos divididas en múltiples tiendas digitales y consolas físicas. 
 | Dolor | Impacto |
 |---|---|
