@@ -133,4 +133,38 @@ class ComentarioServiceTest {
         assertThatThrownBy(() -> service.desactivar(99L))
                 .isInstanceOf(ResourceNotFoundException.class);
     }
+    @Test
+    void Given_ResenaNoExiste_When_Crear_Then_LanzaBusinessException() {
+        // Given
+        ComentarioDto dto = new ComentarioDto();
+        dto.setIdUsuario(1L); // Usuario existe (mockeado abajo)
+        dto.setIdResena(99L); // Reseña no existe
+
+        when(webClientBuilder.build()).thenReturn(webClient);
+        when(webClient.get()).thenReturn(requestHeadersUriSpec);
+        when(requestHeadersUriSpec.uri(anyString())).thenReturn(requestHeadersUriSpec);
+        when(requestHeadersUriSpec.retrieve()).thenReturn(responseSpec);
+
+        // Mockeamos el usuario OK, pero la reseña falla (404)
+        when(responseSpec.bodyToMono(Object.class))
+                .thenReturn(Mono.just(new Object())) // Usuario OK
+                .thenReturn(Mono.error(WebClientResponseException.create(404, "Not Found", null, null, null))); // Reseña falla
+
+        // Then
+        assertThatThrownBy(() -> service.crear(dto))
+                .isInstanceOf(BusinessException.class)
+                .hasMessageContaining("La reseña con ID 99 no existe");
+    }
+    @Test
+    void Given_ComentarioYaInactivo_When_Desactivar_Then_LanzaBusinessException() {
+        // Given
+        Comentario c = new Comentario();
+        c.setComentarioActivo(false); // YA ESTÁ INACTIVO
+        when(repository.findById(1L)).thenReturn(Optional.of(c));
+
+        // Then
+        assertThatThrownBy(() -> service.desactivar(1L))
+                .isInstanceOf(BusinessException.class)
+                .hasMessageContaining("El comentario ya se encuentra inactivo");
+    }
 }
