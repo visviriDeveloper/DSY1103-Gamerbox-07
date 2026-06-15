@@ -26,7 +26,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <!-- Declaración exacta de los 8 microservicios del proyecto -->
     <modules>
         <module>ms-usuarios</module>
         <module>ms-juegos</module>
@@ -50,7 +49,6 @@
         </dependencies>
     </dependencyManagement>
 
-    <!-- Dependencias globales heredadas por TODOS los microservicios -->
     <dependencies>
         <dependency>
             <groupId>org.springdoc</groupId>
@@ -69,7 +67,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-        <!-- WebFlux incluido globalmente para habilitar WebClient en las comunicaciones internas -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
@@ -78,6 +75,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -88,11 +86,6 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-
     </dependencies>
 
     <build>
@@ -104,5 +97,38 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.11</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <excludes>
+                        <exclude>cl/duoc/gamerbox/**/dto/**</exclude>
+                        <exclude>cl/duoc/gamerbox/**/model/**</exclude>
+                        <exclude>cl/duoc/gamerbox/**/exceptions/**</exclude>
+                        <exclude>cl/duoc/gamerbox/**/config/**</exclude>
+                        <exclude>cl/duoc/gamerbox/**/*Application.class</exclude>
+                        <exclude>cl/duoc/gamerbox/**/*DTO/**</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>
