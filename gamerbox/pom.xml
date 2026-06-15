@@ -121,6 +121,7 @@
                 <configuration>
                     <excludes>
                         <exclude>cl/duoc/gamerbox/**/dto/**</exclude>
+                        <exclude>cl/duoc/gamerbox/**/controller/**</exclude>
                         <exclude>cl/duoc/gamerbox/**/model/**</exclude>
                         <exclude>cl/duoc/gamerbox/**/exceptions/**</exclude>
                         <exclude>cl/duoc/gamerbox/**/config/**</exclude>
