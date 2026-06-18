@@ -19,10 +19,12 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        // Cualquiera puede ver el catálogo de juegos
+
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+
+
                         .requestMatchers(HttpMethod.GET, "/api/v1/juegos/**").permitAll()
 
-                        // Solo el ADMIN puede hacer POST, PUT o DELETE en juegos
                         .requestMatchers("/api/v1/juegos/**").hasRole("ADMIN")
 
                         .anyRequest().authenticated()
