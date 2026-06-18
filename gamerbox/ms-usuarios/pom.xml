@@ -4,7 +4,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Referencia al Proyecto Padre de Gamerbox -->
     <parent>
         <groupId>cl.duoc.gamerbox</groupId>
         <artifactId>gamerbox-parent</artifactId>
@@ -15,38 +14,24 @@
     <artifactId>ms-usuarios</artifactId>
     <name>Gamerbox - Microservicio Usuarios</name>
     <description>Manejo de la información de cada usuario</description>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
+
     <dependencies>
-        <!-- Persistencia de datos con JPA -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        <!-- Driver para PostgreSQL -->
+
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <!-- Documentación de API con Swagger/OpenAPI -->
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.5.0</version>
-        </dependency>
 
-        <!--
-          Nota: Las siguientes dependencias ya se heredan del padre:
-          - spring-boot-starter-web
-          - spring-boot-starter-validation
-          - spring-boot-starter-security
-          - spring-boot-starter-webflux
-          - spring-boot-starter-actuator
-          - spring-boot-starter-test
-        -->
     </dependencies>
 
     <build>
@@ -54,16 +39,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
             </plugin>
-
         </plugins>
     </build>
 </project>

@@ -1,38 +1,49 @@
 package cl.duoc.gamerbox.resenas.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "resenas")
+@Schema(description = "Entidad que representa la opinión y calificación de un usuario sobre un videojuego específico")
 public class Resena {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "ID único de la reseña", example = "1", accessMode = Schema.AccessMode.READ_ONLY)
     private Long idResena;
 
     @Column(name = "id_juego", nullable = false)
+    @Schema(description = "Identificador del juego (Referencia a ms-juegos)", example = "15")
     private Long idJuego;
 
     @Column(name = "id_usuario", nullable = false)
+    @Schema(description = "Identificador del autor (Referencia a ms-usuarios)", example = "42")
     private Long idUsuario;
 
     @Column(name = "titulo", nullable = false, length = 100)
+    @Schema(description = "Título corto de la reseña", example = "Obra maestra indiscutible")
     private String titulo;
 
     @Column(name = "cuerpo", nullable = false, length = 1000)
+    @Schema(description = "Texto detallado con la opinión del jugador", example = "El diseño de niveles es increíble y la jugabilidad responde perfecto...")
     private String cuerpo;
 
     @Column(name = "plataforma", nullable = false, length = 50)
+    @Schema(description = "Plataforma en la que el usuario jugó el título", example = "PC")
     private String plataforma;
 
     @Column(name = "calificacion", nullable = false)
+    @Schema(description = "Puntuación otorgada al juego (1 a 5)", example = "5")
     private Integer calificacion;
 
     @Column(name = "fecha_posteo", nullable = false)
+    @Schema(description = "Fecha y hora en la que se publicó la reseña", accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDateTime fechaPosteo;
 
     @Column(name = "estado", nullable = false)
+    @Schema(description = "Estado de visibilidad de la reseña (borrado lógico)", example = "true", accessMode = Schema.AccessMode.READ_ONLY)
     private Boolean estado;
 
     public Resena() {}
