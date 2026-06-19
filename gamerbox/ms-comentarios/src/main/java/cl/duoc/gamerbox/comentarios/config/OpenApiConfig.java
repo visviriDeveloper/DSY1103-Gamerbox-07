@@ -12,43 +12,23 @@ import org.springframework.context.annotation.Configuration;
 public class OpenApiConfig {
 
     @Bean
-    public OpenAPI configurarOpenApi() {
-        // Información de contacto
+    public OpenAPI configuracionOpenAPI() {
+
         Contact contacto = new Contact()
-                .name("Darithza Scarleht Cárdenas Vargas")
-                .email("dari.cardenas@duocuc.cl")
-                .url("https://www.duoc.cl");
-        Contact contacto1 = new Contact()
-                .name("Álvaro David Morales Yanquin")
-                .email("al.moralesy@duoc.cl")
-                .url("https://www.duoc.cl");
-        Contact contacto2 = new Contact()
-                .name("Matias Fernando Wenger Meza")
-                .email("ma.wenger@duocuc.cl")
-                .url("https://www.duoc.cl");
-
-        // Licencia del proyecto
-        License licencia = new License()
-                .name("MIT")
-                .url("https://opensource.org/licences/MIT");
-
-        // Información principal de la API
-        Info informacionApi = new Info()
-                .description("""
-                        API para la administracion
-                        de comentarios de reseñas
-                        """)
-                .version("1.0")
-                .termsOfService("https://www.duoc.cl")
-                .contact(contacto)
-                .license(licencia);
-        // Documentación externa (GitHub)
-        ExternalDocumentation github = new ExternalDocumentation()
-                .description("Repositorio oficial del proyecto en GitHub")
+                .name("Repositorio de Github - Gamerbox")
                 .url("https://github.com/visviriDeveloper/DSY1103-Gamerbox-07");
-        // Configuración OpenAPI
+
+        License licencia = new License()
+                .name("MIT License")
+                .url("https://opensource.org/licenses/MIT");
+
         return new OpenAPI()
-                .info(informacionApi)
-                .externalDocs(github);
+                .info(new Info()
+                        .title("Microservicio de COMENTARIOS - Gamerbox")
+                        .description("Motor de interacción social encargado de gestionar las respuestas y debates dentro de las reseñas de los juegos.")
+                        .version("1.0.0")
+                        .contact(contacto)
+                        .license(licencia)
+                );
     }
 }
