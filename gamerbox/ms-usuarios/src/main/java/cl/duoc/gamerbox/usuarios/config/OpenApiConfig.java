@@ -24,7 +24,7 @@ public class OpenApiConfig {
         return new OpenAPI()
 
                 .info(new Info()
-                                .title("Microservicio de USUARIOS")
+                                .title("Microservicio de USUARIOS - Gamerbox")
                                 .description("Microservicio API REST encargado del ciclo de vida de las cuentas de usuario, validaciones de identidad y persistencia del perfil en el ecosistema Gamerbox.")
                                 .version("1.0")
                                 .contact(contacto)

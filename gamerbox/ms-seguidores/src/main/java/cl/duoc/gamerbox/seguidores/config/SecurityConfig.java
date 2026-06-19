@@ -19,6 +19,8 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+
                         .requestMatchers(HttpMethod.GET, "/api/v1/seguidores/**").permitAll()
 
                         // Cualquier petición que no sea GET requerirá enviar credenciales por Basic Auth

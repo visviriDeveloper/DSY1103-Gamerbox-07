@@ -19,9 +19,13 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        // 1. Liberamos las rutas de Swagger para que la interfaz cargue sin pedir clave
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+
+                        // 2. Permitimos la lectura pública de las listas
                         .requestMatchers(HttpMethod.GET, "/api/v1/listas/**").permitAll()
 
-                        // Cualquier petición que no sea GET requerirá enviar credenciales por Basic Auth
+                        // 3. Cualquier petición que no sea GET requerirá enviar credenciales por Basic Auth
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults());
