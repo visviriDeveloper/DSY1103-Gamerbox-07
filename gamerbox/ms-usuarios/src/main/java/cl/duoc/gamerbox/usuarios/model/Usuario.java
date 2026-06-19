@@ -1,30 +1,38 @@
 package cl.duoc.gamerbox.usuarios.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "usuarios")
+@Schema(description = "Entidad que representa un usuario registrado en el ecosistema Gamerbox")
 public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "Identificador único autoincrementable del usuario", example = "1", accessMode = Schema.AccessMode.READ_ONLY)
     private Long idUsuario;
 
     @Column(name = "nombre_usuario", nullable = false, length = 50)
+    @Schema(description = "Nombre de usuario o nickname público", example = "Solaire_Astora28")
     private String nombreUsuario;
 
     @Column(name = "correo_usuario", nullable = false, unique = true, length = 100)
+    @Schema(description = "Correo electrónico único vinculado a la cuenta", example = "matisoftware@gamerbox.cl")
     private String correoUsuario;
 
     @Column(name = "password_usuario", nullable = false)
+    @Schema(description = "Contraseña del usuario (almacenada de forma segura)", example = "KagurabachibestAnime4ever")
     private String passwordUsuario;
 
     @Column(name = "fecha_registro", nullable = false, updatable = false)
+    @Schema(description = "Fecha y hora exacta de la creación de la cuenta", accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDateTime fechaRegistro;
 
     @Column(name = "activo", nullable = false)
+    @Schema(description = "Estado de la cuenta (true = activa, false = suspendida/eliminada)", example = "true", accessMode = Schema.AccessMode.READ_ONLY)
     private Boolean activo;
 
     // CONSTRUCTORES

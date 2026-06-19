@@ -7,10 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
-@Schema(
-        name = "UsuarioDTO",
-        description = "Este DTO representa los datos necesarios del modelo de  usuario en Gamerbox"
-)
+@Schema(name = "UsuarioDTO", description = "Objeto de transferencia de datos utilizado para la creación y manipulación de perfiles de usuario")
 public record UsuarioDTO(
 
                 @Schema(
