@@ -19,6 +19,29 @@ services:
     networks:
       - gamerbox-network
 
+    # ====================================================================
+    # API GATEWAY (LA ÚNICA PUERTA DE ENTRADA AL MUNDO EXTERIOR)
+    # ====================================================================
+  api-gateway:
+      image: gamerbox/api-gateway:1.0
+      container_name: api-gateway-app
+      restart: on-failure
+      build:
+        context: ./api-gateway
+        dockerfile: Dockerfile
+      ports:
+        - "8080:8080"
+      depends_on:
+        - ms-login
+        - ms-usuarios
+        - ms-juegos
+        - ms-resenas
+        - ms-listas
+        - ms-comentarios
+        - ms-seguidores
+        - ms-feed
+      networks:
+        - gamerbox-network
   # ====================================================================
   # MICROSERVICIO: USUARIOS (Puerto 8081)
   # ====================================================================
@@ -29,8 +52,6 @@ services:
     build:
       context: ./ms-usuarios
       dockerfile: Dockerfile
-    ports:
-      - "8081:8081"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/gamerbox_usuarios
       - SPRING_DATASOURCE_USERNAME=postgres
@@ -54,8 +75,6 @@ services:
     build:
       context: ./ms-juegos
       dockerfile: Dockerfile
-    ports:
-      - "8082:8082"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/gamerbox_juegos
       - SPRING_DATASOURCE_USERNAME=postgres
@@ -78,8 +97,6 @@ services:
     build:
       context: ./ms-resenas
       dockerfile: Dockerfile
-    ports:
-      - "8083:8083"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/gamerbox_resenas
       - SPRING_DATASOURCE_USERNAME=postgres
@@ -102,8 +119,6 @@ services:
     build:
       context: ./ms-listas
       dockerfile: Dockerfile
-    ports:
-      - "8084:8084"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/gamerbox_listas
       - SPRING_DATASOURCE_USERNAME=postgres
@@ -127,8 +142,6 @@ services:
     build:
       context: ./ms-comentarios
       dockerfile: Dockerfile
-    ports:
-      - "8085:8085"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/gamerbox_comentarios
       - SPRING_DATASOURCE_USERNAME=postgres
@@ -152,8 +165,6 @@ services:
     build:
       context: ./ms-seguidores
       dockerfile: Dockerfile
-    ports:
-      - "8086:8086"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/gamerbox_seguidores
       - SPRING_DATASOURCE_USERNAME=postgres
@@ -177,8 +188,6 @@ services:
     build:
       context: ./ms-feed
       dockerfile: Dockerfile
-    ports:
-      - "8087:8087"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/gamerbox_feed
       - SPRING_DATASOURCE_USERNAME=postgres
@@ -202,8 +211,6 @@ services:
     build:
       context: ./ms-login
       dockerfile: Dockerfile
-    ports:
-      - "8088:8088"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/gamerbox_login
       - SPRING_DATASOURCE_USERNAME=postgres

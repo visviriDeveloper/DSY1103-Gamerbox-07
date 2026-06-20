@@ -1,0 +1,140 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+      routes:
+        # ==========================================
+        # 1. RUTAS DE NEGOCIO (Tráfico de Postman)
+        # ==========================================
+        - id: ms-login
+          uri: http://ms-login:8088
+          predicates:
+            - Path=/api/v1/auth/**
+
+        - id: ms-usuarios
+          uri: http://ms-usuarios:8081
+          predicates:
+            - Path=/api/v1/usuarios/**
+
+        - id: ms-juegos
+          uri: http://ms-juegos:8082
+          predicates:
+            - Path=/api/v1/juegos/**
+
+        - id: ms-resenas
+          uri: http://ms-resenas:8083
+          predicates:
+            - Path=/api/v1/resenas/**
+
+        - id: ms-listas
+          uri: http://ms-listas:8084
+          predicates:
+            - Path=/api/v1/listas/**
+
+        - id: ms-comentarios
+          uri: http://ms-comentarios:8085
+          predicates:
+            - Path=/api/v1/comentarios/**
+
+        - id: ms-seguidores
+          uri: http://ms-seguidores:8086
+          predicates:
+            - Path=/api/v1/seguidores/**
+
+        - id: ms-feed
+          uri: http://ms-feed:8087
+          predicates:
+            - Path=/api/v1/feed/**
+
+        # ==========================================
+        # 2. RUTAS DE EXTRACCIÓN SWAGGER
+        # ==========================================
+        - id: openapi-login
+          uri: http://ms-login:8088
+          predicates:
+            - Path=/v3/api-docs/login
+          filters:
+            - RewritePath=/v3/api-docs/login, /v3/api-docs
+
+        - id: openapi-usuarios
+          uri: http://ms-usuarios:8081
+          predicates:
+            - Path=/v3/api-docs/usuarios
+          filters:
+            - RewritePath=/v3/api-docs/usuarios, /v3/api-docs
+
+        - id: openapi-juegos
+          uri: http://ms-juegos:8082
+          predicates:
+            - Path=/v3/api-docs/juegos
+          filters:
+            - RewritePath=/v3/api-docs/juegos, /v3/api-docs
+
+        - id: openapi-resenas
+          uri: http://ms-resenas:8083
+          predicates:
+            - Path=/v3/api-docs/resenas
+          filters:
+            - RewritePath=/v3/api-docs/resenas, /v3/api-docs
+
+        - id: openapi-listas
+          uri: http://ms-listas:8084
+          predicates:
+            - Path=/v3/api-docs/listas
+          filters:
+            - RewritePath=/v3/api-docs/listas, /v3/api-docs
+
+        - id: openapi-comentarios
+          uri: http://ms-comentarios:8085
+          predicates:
+            - Path=/v3/api-docs/comentarios
+          filters:
+            - RewritePath=/v3/api-docs/comentarios, /v3/api-docs
+
+        - id: openapi-seguidores
+          uri: http://ms-seguidores:8086
+          predicates:
+            - Path=/v3/api-docs/seguidores
+          filters:
+            - RewritePath=/v3/api-docs/seguidores, /v3/api-docs
+
+        - id: openapi-feed
+          uri: http://ms-feed:8087
+          predicates:
+            - Path=/v3/api-docs/feed
+          filters:
+            - RewritePath=/v3/api-docs/feed, /v3/api-docs
+
+# ==========================================
+# 3. CONFIGURACIÓN DEL PANEL UI CENTRAL
+# ==========================================
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    urls:
+      - name: "1. Login y Autenticacion"
+        url: /v3/api-docs/login
+      - name: "2. Gestion de Usuarios"
+        url: /v3/api-docs/usuarios
+      - name: "3. Catálogo de Juegos"
+        url: /v3/api-docs/juegos
+      - name: "4. Sistema de Reseñas"
+        url: /v3/api-docs/resenas
+      - name: "5. Listas Personalizadas"
+        url: /v3/api-docs/listas
+      - name: "6. Comentarios"
+        url: /v3/api-docs/comentarios
+      - name: "7. Seguidores y Comunidad"
+        url: /v3/api-docs/seguidores
+      - name: "8. Feed y Muro de Actividad"
+        url: /v3/api-docs/feed

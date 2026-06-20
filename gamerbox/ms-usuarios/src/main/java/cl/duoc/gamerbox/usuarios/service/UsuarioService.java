@@ -48,7 +48,7 @@ public class UsuarioService {
     @Transactional(readOnly = true)
     public List<UsuarioDTO> listarTodos() {
         return usuarioRepository.findAll().stream()
-                .map(this::mapToDTO) // Usamos nuestro método manual
+                .map(this::mapToDTO) // Usamos nuestro metodo manual
                 .collect(Collectors.toList());
     }
 
