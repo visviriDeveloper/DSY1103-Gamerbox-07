@@ -1,4 +1,4 @@
-# Sistema de Microservicios "GamerBox"
+# Sistema de Microservicios "Gamerbox"
 
 **Plataforma de registro, seguimiento de backlogs y comunidad de videojuegos**
 
