@@ -1,3 +1,4 @@
+# Etapa 1: Construcción (Build)
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 COPY target/ms-juegos-*.jar app.jar
