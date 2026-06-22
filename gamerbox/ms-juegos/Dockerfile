@@ -1,5 +1,19 @@
+# Etapa 1: Construcción (Build)
+FROM maven:3.9.5-eclipse-temurin-17-alpine AS build
+WORKDIR /app
+
+# Copiamos todo el monorepo para que Maven tenga acceso al pom.xml padre
+COPY . .
+
+# Compilamos ESPECÍFICAMENTE ms-juegos y sus dependencias (el padre)
+RUN mvn clean package -pl ms-juegos -am -DskipTests
+
+# Etapa 2: Ejecución (Runtime)
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
-COPY target/ms-juegos-*.jar app.jar
+
+# Copiamos el .jar generado en la etapa 1
+COPY --from=build /app/ms-juegos/target/ms-juegos-*.jar app.jar
+
 EXPOSE 8082
 ENTRYPOINT ["java", "-jar", "app.jar"]
