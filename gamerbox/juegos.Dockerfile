@@ -1,28 +1,26 @@
+Dockerfile
 # ==========================================
-# ETAPA 1: Construcción (Builder)
+# ETAPA 1: Construcción (Builder temporal)
 # ==========================================
 FROM maven:3.9.6-eclipse-temurin-17-alpine AS builder
 WORKDIR /app
 
-# 1. Copiamos el pom.xml padre
-COPY pom.xml .
+# Copiamos TODO el ecosistema de golpe (es seguro porque esta etapa se borra)
+COPY . .
 
-# 2. Copiamos SOLAMENTE la carpeta del microservicio que queremos
-COPY ms-juegos ms-juegos
-
-# 3. Ejecutamos el truco multi-módulo que íbamos a usar antes
+# Maven compila solo ms-juegos y las dependencias de su padre
 RUN mvn clean package -pl ms-juegos -am -DskipTests
 
 # ==========================================
-# ETAPA 2: Ejecución (Runtime ligero)
+# ETAPA 2: Ejecución (Runtime ligero para Producción)
 # ==========================================
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
-# Extraemos el .jar que se generó en la Etapa 1
+# Extraemos SOLAMENTE el .jar compilado de la Etapa 1
 COPY --from=builder /app/ms-juegos/target/*.jar app.jar
 
-# Exponemos el puerto del microservicio
+# Exponemos el puerto
 EXPOSE 8082
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
