@@ -4,10 +4,11 @@
 FROM maven:3.9.6-eclipse-temurin-17-alpine AS builder
 WORKDIR /app
 
-# Copiamos TODO el ecosistema de golpe (es seguro porque esta etapa se borra)
+
 COPY . .
 
 # Maven compila solo ms-juegos y las dependencias de su padre
+RUN ls -R
 RUN mvn clean package -pl ms-juegos -am -DskipTests
 
 # ==========================================
